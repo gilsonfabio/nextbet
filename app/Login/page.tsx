@@ -24,11 +24,11 @@ export default function Login() {
       return
     }
 
-    router.replace('/Dashboard')
+    router.replace('/')
   }
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-screen">
+    <div className="flex flex-col items-center justify-center w-full h-screen bg-slate-900">
       <h1 className="text-3xl mb-6">Login</h1>
 
       <form className="w-[400px] flex flex-col gap-6" onSubmit={handleSubmit}>

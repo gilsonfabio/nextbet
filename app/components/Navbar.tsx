@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import ButtonLogout from "./ButtonLogout";
 
 export default function Navbar() {
     const { data: session} = useSession();
@@ -10,7 +11,7 @@ export default function Navbar() {
             <Link href={'/'} className="text-black text-3xl font-bold hover:text-green-600 hover:cursor-pointer">
                 LOGO
             </Link>
-            {!session &&
+            {!session ?
             <div className="w-[1/4] flex flex-row items-center justify-between ">
                 <Link href={'/Register'} className="text-black text-md font-bold hover:text-green-600 hover:cursor-pointer mr-10">
                     Registre-se
@@ -20,6 +21,13 @@ export default function Navbar() {
                         Login
                     </Link>
                 </div>
+            </div>
+            : 
+            <div className="w-[1/4] flex flex-row items-center justify-between ">
+                <Link href={'/Register'} className="text-black text-md font-bold hover:text-green-600 hover:cursor-pointer mr-10">
+                    Ola´ {session.user?.name}, Bem-vindo! 
+                </Link>
+                <ButtonLogout />
             </div>
             }
         </div>        

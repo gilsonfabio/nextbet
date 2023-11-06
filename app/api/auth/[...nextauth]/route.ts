@@ -23,7 +23,7 @@ const nextAuthOptions: NextAuthOptions = {
 				})
 
 				const user = await response.json()
-
+                console.log('Dados do usuário:',user)
 				if (user && response.ok) {
 					console.log(user)
 					return user
@@ -37,20 +37,35 @@ const nextAuthOptions: NextAuthOptions = {
 		signIn: '/'
 	},
 	callbacks: {
+		//async jwt({ token, user }) {
+		//	user && (token.user = user)
+		//	return token
+		//},
+
 		async jwt({ token, user }) {
-			user && (token.user = user)
+			const customUser = user as unknown as any
+	  
+			if (user) {        
+			  return {
+				...token,
+				id: user.id,
+				role: 'admin'   //customUser.role
+			  }
+			}
+	  
 			return token
 		},
+
 		async session({ session, token, user }){
-			session = token.user as any
+			session = token.user as any			
 			return {
-				...session,
+				...session,				
 				user: {
+					id: token.id,
 					name: token.name,
 					email: token.email,
 					role: token.role,
-					id: token.id
-			  }
+			  	}
 			}
 		}
 	}

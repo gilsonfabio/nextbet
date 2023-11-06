@@ -2,7 +2,7 @@ import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/route"
 import ButtonLogout from "../components/ButtonLogout"
 import { getServerSession } from "next-auth"
 
-const Dashboard = async () => {
+const AnteriorDashboard = async () => {
     const session = await getServerSession(nextAuthOptions)
     return (
       <div className="w-full h-full flexflex-col items-center justify-center ">
@@ -14,4 +14,4 @@ const Dashboard = async () => {
     )
 }
 
-export default Dashboard ;
+export default AnteriorDashboard ;
