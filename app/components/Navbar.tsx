@@ -25,7 +25,7 @@ export default function Navbar() {
             : 
             <div className="w-[1/4] flex flex-row items-center justify-between ">
                 <Link href={'/Register'} className="text-black text-md font-bold hover:text-green-600 hover:cursor-pointer mr-10">
-                    Ola´ {session.user?.name}, Bem-vindo! 
+                    Ola´ {session.user?.name}, Bem-vindo! -  {session.user.id}
                 </Link>
                 <ButtonLogout />
             </div>

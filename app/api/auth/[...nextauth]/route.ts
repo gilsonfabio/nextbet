@@ -55,19 +55,11 @@ const nextAuthOptions: NextAuthOptions = {
 	  
 			return token
 		},
-
-		async session({ session, token, user }){
-			session = token.user as any			
-			return {
-				...session,				
-				user: {
-					id: token.id,
-					name: token.name,
-					email: token.email,
-					role: token.role,
-			  	}
-			}
-		}
+		
+		async session({ session, token }) {
+			session.user = token as any;
+			return session;
+		},
 	}
 }
 
