@@ -59,29 +59,34 @@ const Aposta = ({params}: any) => {
 
     useEffect(() => {  
       const idMov = params.movId;
+      const idUsr: any = session?.user.id;
+      setUsrId(idUsr);
+      
       api({
         method: 'get',    
         url: `busMovim/${idMov}`,             
       }).then(function(response) {
         setMovimentos(response.data);
-        setEquipe01(response.data.movEqu01); 
-        setEquDesc01(response.data.timeA_desc); 
-        setEquipe02(response.data.movEqu02); 
-        setEquDesc02(response.data.timeB_desc); 
-        setEquipe03(response.data.movEqu03);
-        setEquDesc03(response.data.timeC_desc); 
+        //setEquipe01(response.data.movEqu01); 
+        //setEquDesc01(response.data.timeA_desc); 
+        //setEquipe02(response.data.movEqu02); 
+        //setEquDesc02(response.data.timeB_desc); 
+        //setEquipe03(response.data.movEqu03);
+        //setEquDesc03(response.data.timeC_desc); 
         equipes.shift();
-        equipes.push({equId: response.data.movEqu01, equDescricao: response.data.timeA_desc});
-        equipes.push({equId: response.data.movEqu02, equDescricao: response.data.timeB_desc});
-        equipes.push({equId: response.data.movEqu03, equDescricao: response.data.timeC_desc});
-                
-        setDadEquipe(equipes);
+
+        if (dadEquipe.length === 0 ) {
+          dadEquipe.push({equId: response.data.movEqu01, equDescricao: response.data.timeA_desc});
+          dadEquipe.push({equId: response.data.movEqu02, equDescricao: response.data.timeB_desc});
+          dadEquipe.push({equId: response.data.movEqu03, equDescricao: response.data.timeC_desc});
+        } 
+        //setDadEquipe(equipes);
 
       }).catch(function(error) {  
         alert('Erro no movimento!')                 
-      })     
+      })
     }, [])
-
+   
     async function handleCadastra(e:any){      
         e.preventDefault();
 
@@ -95,7 +100,7 @@ const Aposta = ({params}: any) => {
             lanValor: vlrAposta,                      
           },
         }).then(function(response) {
-            alert('Novo  cadastrado com sucesso!')
+            alert('Novo cadastrado com sucesso!')
         }).catch(function(error) {
           alert('Erro no cadastro!')
         })

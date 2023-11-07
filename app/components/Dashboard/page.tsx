@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { useSession } from "next-auth/react";
 
 import api from '../../components/Services/api';
 import { FaBars } from 'react-icons/fa';
@@ -76,6 +77,7 @@ export default function Dashboard() {
     const [eventos, setEventos] = useState<Array<EventosServices>>([]);
     const [equipes, setEquipes] = useState<Array<EquipesServices>>([]);
     const [movimentos, setMovimentos] = useState<Array<ServicesProps>>([]);
+    const { data: session} = useSession();
 
     const cor = '#D97706';
     
@@ -111,8 +113,12 @@ export default function Dashboard() {
     const router = useRouter();
 
     function handleSubmit(item: any) {
-        const idUser = item.movId;
-        router.push(`/Aposta/${idUser}`)
+        const idUser = item.movId; 
+        if (!session) {       
+            router.push(`/Login`)
+        }else {
+            router.push(`/Aposta/${idUser}`)
+        }    
     }
 
     const [ids, setIds] = useState<Array<number>>([]);
@@ -485,14 +491,16 @@ export default function Dashboard() {
                                                 </div>                
                                             </div>
                                             <div className="flex flex-row items-start justify-between px-2 py-0 mt-1 ">
-                                                <div className={`flex flex-col items-start px-2 py-1`}>
-                                                    <span className={`text-base font-bold mb-0`}>{item.timeA_desc}</span>
+                                                <div className="flex flex-row items-start px-2 py-1">
+                                                    <div className="text-base font-bold mb-0 mr-10">{item.timeA_desc}</div>
+                                                    <div className="text-base font-bold mb-0">{item.movResult01}</div>
                                                 </div>  
-                                                <div className={`flex flex-col items-start px-2 py-1`}>
+                                                <div className="flex flex-col items-start px-2 py-1">
                                                     <span className="text-base font-bold mb-0">X</span>
                                                 </div>  
-                                                <div className={`flex flex-col items-start px-2 py-1`}>
-                                                    <span className={`text-base font-bold mb-0`}>{item.timeC_desc}</span>
+                                                <div className="flex flex-row items-start px-2 py-1">
+                                                    <div className="text-base font-bold mb-0 ">{item.movResult03}</div>
+                                                    <div className="text-base font-bold mb-0 ml-10">{item.timeC_desc}</div>
                                                 </div>                                  
                                             </div>
                                             <div className="flex flex-row items-start justify-between px-2 py-0 ">
