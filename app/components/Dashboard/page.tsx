@@ -444,8 +444,7 @@ export default function Dashboard() {
                         {state &&
                             <div> 
                                 <img src={`${state.base64File}`} />
-                            </div>
-                                                  
+                            </div>                                                  
                         }    
                     </div>
                 </div>

@@ -36,6 +36,10 @@ type MovimProps = {
   "eveDesc": string;
 }
 
+type imgProps = {
+  "base64File": string;
+}
+
 const Aposta = ({params}: any) => {
     const [movimentos, setMovimentos] = useState<Array<MovimProps>>([]); 
     const [dadEquipe, setDadEquipe] = useState<Array<EquipesProps>>([]); 
@@ -87,6 +91,26 @@ const Aposta = ({params}: any) => {
       })
     }, [])
    
+    const [state, setState] = useState<imgProps>();
+
+    function handleImage() {
+        
+      axios({
+          method: 'post',    
+          url: `http://localhost:3333/authorize`,
+          data: {
+              usrId: usrId,
+              lanValor: vlrAposta,
+          }
+      }).then(function(response) {
+          setState({base64File: response.data.imagemQrcode});
+          console.log(state)
+      }).catch(function(error) {
+          console.log(error)
+      })    
+
+  }
+
     async function handleCadastra(e:any){      
         e.preventDefault();
 
@@ -160,7 +184,14 @@ const Aposta = ({params}: any) => {
                         >
                           Cadastrar
                         </button>
-                      </div>                      
+                      </div>  
+                      <div className='mb-4'>                        
+                        {state &&
+                            <div> 
+                                <img src={`${state.base64File}`} />
+                            </div>                                                  
+                        }    
+                      </div>                    
                     </form>
                   </div>
                 </div>
