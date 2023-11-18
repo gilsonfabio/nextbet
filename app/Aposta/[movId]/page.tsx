@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 
 import api from '../../components/Services/api';
 
@@ -47,7 +48,8 @@ const Aposta = ({params}: any) => {
     const [equId, setEquId] = useState('');
     const [vlrAposta, setVlrAposta] = useState('');
     const [atualiza, setAtualiza] = useState(0);
-    
+    const [lanId, setLanId] = useState('');
+
     const [equipe01, setEquipe01] = useState(0);
     const [equDesc01, setEquDesc01] = useState('');
     const [equipe02, setEquipe02] = useState(0);
@@ -56,6 +58,7 @@ const Aposta = ({params}: any) => {
     const [equDesc03, setEquDesc03] = useState('');   
     
     const { data: session} = useSession();
+    const router = useRouter();
 
     const equipes = [
       {'equId': 1, 'equDescricao': 'Equipe Nº 1'}
@@ -94,13 +97,15 @@ const Aposta = ({params}: any) => {
     const [state, setState] = useState<imgProps>();
 
     function handleImage() {
-        
+      
       axios({
           method: 'post',    
           url: `http://localhost:3333/authorize`,
           data: {
-              usrId: usrId,
-              lanValor: vlrAposta,
+            lanUsrId: usrId,  
+            lanMovId: params.movId,
+            lanEquId: equId,
+            lanValor: vlrAposta,   
           }
       }).then(function(response) {
           setState({base64File: response.data.imagemQrcode});
@@ -109,7 +114,7 @@ const Aposta = ({params}: any) => {
           console.log(error)
       })    
 
-  }
+    }
 
     async function handleCadastra(e:any){      
         e.preventDefault();
@@ -124,10 +129,16 @@ const Aposta = ({params}: any) => {
             lanValor: vlrAposta,                      
           },
         }).then(function(response) {
-            alert('Novo cadastrado com sucesso!')
+            alert(`Novo cadastrado com sucesso! ${response.data}` )
+            setLanId(response.data)
+            handleImage()
         }).catch(function(error) {
           alert('Erro no cadastro!')
         })
+    }
+
+    function handleDashboard() {
+      router.push('/')
     }
 
     return (
@@ -180,17 +191,33 @@ const Aposta = ({params}: any) => {
                         <button
                           className='bg-green inline-block px-6 py-2.5 text-black hover:text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3'
                           type='button'
-                          onClick={handleCadastra}
+                          onClick={handleImage}
                         >
                           Cadastrar
                         </button>
                       </div>  
-                      <div className='mb-4'>                        
+                      <div className='flex flex-row mb-4 items-center justify-between'>                        
                         {state &&
+                          <div>
                             <div> 
                                 <img src={`${state.base64File}`} />
                             </div>                                                  
-                        }    
+                            <div className='flex flex-col'>
+                              <span className='text-2xl text-black font-bold'>
+                                {`${vlrAposta}`}
+                              </span>
+                              <div className='text-center pt-1 mb-12 pb-1'>
+                                <button
+                                  className='bg-green inline-block px-6 py-2.5 text-black hover:text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3'
+                                  type='button'
+                                  onClick={handleDashboard}
+                                >
+                                  Sair
+                                </button>
+                              </div>  
+                            </div>
+                          </div>
+                        }                            
                       </div>                    
                     </form>
                   </div>
