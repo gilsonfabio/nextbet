@@ -11,7 +11,7 @@ const nextAuthOptions: NextAuthOptions = {
 			},
 
 			async authorize(credentials, req) {
-				const response = await fetch('http://localhost:3333/signIn', {
+				const response = await fetch('https://backbet.vercel.app/signIn', {
 					method: 'POST',
 					headers: {
 						'Content-type': 'application/json'
