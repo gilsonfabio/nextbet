@@ -20,7 +20,7 @@ export default function Login() {
     })
 
     if (result?.error) {
-      console.log(result)
+      //console.log(result)
       return
     }
 

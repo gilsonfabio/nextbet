@@ -148,17 +148,24 @@ export default function Dashboard() {
 
         //console.log(testeJson);
 
-        axios({
-            method: 'post',    
-            url: `http://localhost:3333/movimentos`,
-            data: testeJson,
-        }).then(function(response) {
+        api.post("/movimentos",{testeJson}).then(response => {
             setMovimentos(response.data.movimentos)
-            setPages(response.data.pagination.lastPage);
-        }).catch(function(error) {
-            console.log(error)
-        })
-      
+            setPages(response.data.pagination.lastPage);          
+        }).catch((err) => {
+            console.error("ops! ocorreu um erro" + err);
+        });    
+
+        //axios({
+        //    method: 'post',    
+        //    url: 'https://backbet.vercel.app/movimentos',
+        //    data: testeJson,
+        //}).then(function(response) {
+        //    setMovimentos(response.data.movimentos)
+        //    setPages(response.data.pagination.lastPage);
+        //}).catch(function(error) {
+        //    console.log(error)
+        //})
+
         api.get("/modalidades").then(res => {
             setModalidades(res.data)           
         }).catch((err) => {
@@ -212,16 +219,23 @@ export default function Dashboard() {
 
             //console.log(testeJson);
 
-            axios({
-                method: 'post',    
-                url: `http://localhost:3333/movimentos`,
-                data: testeJson,
-            }).then(function(response) {
+            api.post("/movimentos",{testeJson}).then(response => {
                 setMovimentos(response.data.movimentos)
-                setPages(response.data.pagination.lastPage) 
-            }).catch(function(error) {
-                console.log(error)
-            })              
+                setPages(response.data.pagination.lastPage);          
+            }).catch((err) => {
+                console.error("ops! ocorreu um erro" + err);
+            }); 
+
+            //axios({
+            //   method: 'post',    
+            //    url: 'https://backbet.vercel.app/movimentos',
+            //    data: testeJson,
+            //}).then(function(response) {
+            //    setMovimentos(response.data.movimentos)
+            //    setPages(response.data.pagination.lastPage) 
+            //}).catch(function(error) {
+            //    console.log(error)
+            //})              
         }    
     }, [idsMod, idsEve, idsEqu, search])
 
@@ -253,16 +267,23 @@ export default function Dashboard() {
             testeJson.per_page = perPageDefault;
 
             //console.log('CurrentPage:',testeJson);
-
-            axios({
-                method: 'post',    
-                url: `http://localhost:3333/movimentos`,
-                data: testeJson,
-            }).then(function(response) {
+            
+            api.post("/movimentos",{testeJson}).then(response => {
                 setMovimentos(response.data.movimentos)
-            }).catch(function(error) {
-                console.log(error)
-            })              
+                setPages(response.data.pagination.lastPage);          
+            }).catch((err) => {
+                console.error("ops! ocorreu um erro" + err);
+            }); 
+
+            //axios({
+            //    method: 'post',    
+            //    url: 'https://backbet.vercel.app/movimentos',
+            //    data: testeJson,
+            //}).then(function(response) {
+            //    setMovimentos(response.data.movimentos)
+            //}).catch(function(error) {
+            //    console.log(error)
+            //})              
         }    
     }, [currentPage ])
 
