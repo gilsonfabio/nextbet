@@ -25,7 +25,7 @@ const nextAuthOptions: NextAuthOptions = {
 				const user = await response.json()
                 console.log('Dados do usuário:',user)
 				if (user && response.ok) {
-					console.log(user)
+					//console.log(user)
 					return user
 				}
 

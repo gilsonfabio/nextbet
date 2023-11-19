@@ -22,7 +22,7 @@ const Pagination = ({pages, setCurrentPage, setNewPage, pagInitial}:pagesProps) 
     useEffect(() => {
         setNroPage(1)
         setCntPages(1)    
-        console.log('Pagina inicial:', pagInitial);
+        //console.log('Pagina inicial:', pagInitial);
     }, [pagInitial])
 
     function handleNextPage() {        

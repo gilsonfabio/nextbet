@@ -146,7 +146,7 @@ export default function Dashboard() {
         delete testeJson.per_page;
         testeJson.per_page = perPageDefault;
 
-        console.log(testeJson);
+        //console.log(testeJson);
 
         axios({
             method: 'post',    
@@ -210,7 +210,7 @@ export default function Dashboard() {
             delete testeJson.per_page;
             testeJson.per_page = perPageDefault;
 
-            console.log(testeJson);
+            //console.log(testeJson);
 
             axios({
                 method: 'post',    
@@ -252,7 +252,7 @@ export default function Dashboard() {
             delete testeJson.per_page;
             testeJson.per_page = perPageDefault;
 
-            console.log('CurrentPage:',testeJson);
+            //console.log('CurrentPage:',testeJson);
 
             axios({
                 method: 'post',    
@@ -432,21 +432,7 @@ export default function Dashboard() {
                                 </div>
                             </li>                                
                         </div>
-                    </div>
-                    <div className='w-72 ml-3 mt-0 mb-3'>
-                        <button 
-                            className="btn inline-block px-6 py-2 border-1 border-green-600 text-white font-medium text-xs leading-tight uppercase rounded-r-lg bg-green-700 hover:bg-green-400 hover:text-black transition duration-150 ease-in-out" 
-                            onClick={handleImage}
-                            type="button" 
-                            id="button-search">
-                            Imagem
-                        </button>
-                        {state &&
-                            <div> 
-                                <img src={`${state.base64File}`} />
-                            </div>                                                  
-                        }    
-                    </div>
+                    </div>                    
                 </div>
                 <div className='flex flex-col bg-gray-400 w-full justify-center md:w-[75%] h-auto md:mr-20'>
                     <div className='flex items-center justify-center md:w-full p-2'>
