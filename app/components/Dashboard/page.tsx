@@ -148,7 +148,7 @@ export default function Dashboard() {
 
         //console.log(testeJson);
 
-        api.post("/movimentos",{testeJson}).then(response => {
+        api.post("/movimentos",{body: testeJson}).then(response => {
             setMovimentos(response.data.movimentos)
             setPages(response.data.pagination.lastPage);          
         }).catch((err) => {
@@ -217,9 +217,9 @@ export default function Dashboard() {
             delete testeJson.per_page;
             testeJson.per_page = perPageDefault;
 
-            //console.log(testeJson);
+            console.log(testeJson);
 
-            api.post("/movimentos",{testeJson}).then(response => {
+            api.post("/movimentos",{body:testeJson}).then(response => {
                 setMovimentos(response.data.movimentos)
                 setPages(response.data.pagination.lastPage);          
             }).catch((err) => {
@@ -266,9 +266,9 @@ export default function Dashboard() {
             delete testeJson.per_page;
             testeJson.per_page = perPageDefault;
 
-            //console.log('CurrentPage:',testeJson);
+            console.log('CurrentPage:',testeJson);
             
-            api.post("/movimentos",{testeJson}).then(response => {
+            api.post("/movimentos",{body:testeJson}).then(response => {
                 setMovimentos(response.data.movimentos)
                 setPages(response.data.pagination.lastPage);          
             }).catch((err) => {
