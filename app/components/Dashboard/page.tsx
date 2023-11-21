@@ -148,7 +148,14 @@ export default function Dashboard() {
 
         //console.log(testeJson);
 
-        api.post("/movimentos",{body: testeJson}).then(response => {
+        api.post("/movimentos",{
+            modalidade: testeJson.modalidade,
+            evento: testeJson.evento,
+            equipe: testeJson.equipe,
+            searchString: testeJson.searchString, 
+            page: testeJson.page, 
+            per_page: testeJson.per_page
+        }).then(response => {
             setMovimentos(response.data.movimentos)
             setPages(response.data.pagination.lastPage);          
         }).catch((err) => {
@@ -219,7 +226,14 @@ export default function Dashboard() {
 
             console.log(testeJson);
 
-            api.post("/movimentos",{body:testeJson}).then(response => {
+            api.post("/movimentos",{
+                modalidade: testeJson.modalidade,
+                evento: testeJson.evento,
+                equipe: testeJson.equipe,
+                searchString: testeJson.searchString, 
+                page: testeJson.page, 
+                per_page: testeJson.per_page    
+            }).then(response => {
                 setMovimentos(response.data.movimentos)
                 setPages(response.data.pagination.lastPage);          
             }).catch((err) => {
@@ -268,7 +282,14 @@ export default function Dashboard() {
 
             console.log('CurrentPage:',testeJson);
             
-            api.post("/movimentos",{body:testeJson}).then(response => {
+            api.post("/movimentos",{
+                modalidade: testeJson.modalidade,
+                evento: testeJson.evento,
+                equipe: testeJson.equipe,
+                searchString: testeJson.searchString, 
+                page: testeJson.page, 
+                per_page: testeJson.per_page    
+            }).then(response => {
                 setMovimentos(response.data.movimentos)
                 setPages(response.data.pagination.lastPage);          
             }).catch((err) => {
