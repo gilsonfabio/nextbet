@@ -368,7 +368,17 @@ export default function Dashboard() {
     function handleImage() {
         
         let lanId = '1';
-        axios({
+
+        api.post("/authorize",{
+            lanId: lanId,
+        }).then(function(response) {
+            setState({base64File: response.data.imagemQrcode});
+            console.log(state)
+        }).catch(function(error) {
+            console.log(error)
+        }); 
+
+/*        axios({
             method: 'post',    
             url: `http://localhost:3333/authorize`,
             data: {
@@ -380,6 +390,7 @@ export default function Dashboard() {
         }).catch(function(error) {
             console.log(error)
         })    
+*/
 
     }
 
