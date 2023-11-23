@@ -98,6 +98,19 @@ const Aposta = ({params}: any) => {
 
     function handleImage() {
       
+      api.post("/authorize",{
+        lanUsrId: usrId,  
+        lanMovId: params.movId,
+        lanEquId: equId,
+        lanValor: vlrAposta,   
+    }).then(function(response) {
+        setState({base64File: response.data.imagemQrcode});
+        console.log(state)
+    }).catch(function(error) {
+        console.log(error)
+    }); 
+
+    /*
       axios({
           method: 'post',    
           url: `http://localhost:3333/authorize`,
@@ -113,6 +126,7 @@ const Aposta = ({params}: any) => {
       }).catch(function(error) {
           console.log(error)
       })    
+    */
 
     }
 
