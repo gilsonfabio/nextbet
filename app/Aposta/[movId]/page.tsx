@@ -103,12 +103,12 @@ const Aposta = ({params}: any) => {
         lanMovId: params.movId,
         lanEquId: equId,
         lanValor: vlrAposta,   
-    }).then(function(response) {
+      }).then(function(response) {
         setState({base64File: response.data.imagemQrcode});
         console.log(state)
-    }).catch(function(error) {
+      }).catch(function(error) {
         console.log(error)
-    }); 
+      }); 
 
     /*
       axios({
@@ -125,7 +125,8 @@ const Aposta = ({params}: any) => {
           console.log(state)
       }).catch(function(error) {
           console.log(error)
-      })    
+      }) 
+         
     */
 
     }
