@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <NextAuthSessionProvider>
       <html lang="en">
-        <body className="w-screen h-screen flex flex-col bg-gray-300 ">
+        <body className="w-screen h-screen flex flex-col bg-slate-950">
           <Navbar />
           {children}
         </body>

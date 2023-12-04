@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  //baseURL: "http://localhost:3333"
-  baseURL: "https://betbackend-kappa.vercel.app/"
+  baseURL: "http://localhost:3333"
+  //baseURL: "https://betbackend-kappa.vercel.app/"
 });
 
 export default api;

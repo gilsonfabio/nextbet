@@ -10,6 +10,7 @@ import { FaSearch } from 'react-icons/fa';
 import { FaCogs } from 'react-icons/fa';
 import { FaUsersCog } from 'react-icons/fa';
 import { FaUserAlt } from 'react-icons/fa';
+import moment from 'moment';
 import Link from 'next/link';
 import Pagination from '../../components/Pagination/Pagination';
 import SliderShow from '../../components/SliderShow';
@@ -398,7 +399,7 @@ export default function Dashboard() {
         <div className="w-full h-full">
             <SliderShow />            
             <div className='flex flex-col md:flex-row w-full h-auto mt-5'>
-                <div className='bg-gray-300 w-full md:w-[25%] h-auto z-10 md:ml-20'>
+                <div className='bg-slate-900 w-full md:w-[25%] h-auto z-10 md:ml-20'>
                     <span className="text-green-700 text-base font-semibold ml-3">
                         Filtro de Serviços
                     </span>
@@ -487,73 +488,60 @@ export default function Dashboard() {
                         </div>
                     </div>                    
                 </div>
-                <div className='flex flex-col bg-gray-400 w-full justify-center md:w-[75%] h-auto md:mr-20'>
-                    <div className='flex items-center justify-center md:w-full p-2'>
-                        <div className='flex flex-row justify-start items-center w-full'>
-                            <input type="search" 
-                                className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-l-lg transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-green-600 focus:outline-none" 
-                                placeholder="Busca" 
-                                aria-label="Search" 
-                                aria-describedby="button-addon3" 
-                                value={search} 
-                                onChange={(e) => {setSearch(e.target.value)}} />
-                            <button 
-                                className="btn inline-block px-6 py-2 border-1 border-green-600 text-white font-medium text-xs leading-tight uppercase rounded-r-lg bg-green-700 hover:bg-green-400 hover:text-black transition duration-150 ease-in-out" 
-                                onClick={handleSearch}
-                                type="button" 
-                                id="button-search">
-                                <FaSearch className="w-4 h-5 rounded-r-lg"/>
-                            </button>
-                        </div>
-                    </div>
-                    <div className='flex bg-gray-500 w-full h-auto '>
-                        <div className='flex flex-row justify-between items-center w-full text-black p-2 bg-[#F3F3F3] dark:bg-gray-800'> 
+                <div className='flex flex-col bg-slate-950 w-full md:w-[75%] h-auto md:mr-20'>
+                    <div className='flex bg-slate-950 w-full h-auto '>
+                        <div className='flex flex-row justify-between items-center w-full text-black p-2 bg-slate-950'> 
                             <div className='w-full h-auto mr-2 dark:bg-[#F3F3F3] '> 
                                 <div className='flex flex-col w-full h-full text-black'>
-                                    <div className="grid grid-cols-1 gap-1 md:grid-cols-3 md:gap-4 ml-1 px-0 py-0 ">            
+                                    <div className="grid grid-cols-1 gap-1 md:grid-cols-5 md:gap-4 ml-1 px-0 py-0 ">            
                                     {movimentos?.map((item:any, idx) => {
                                     return <button key={idx} onClick={() => handleSubmit(item)}>                                                                               
-                                        <div className='bg-white mt-1 mb-3 rounded overflow-hidden shadow-lg hover:bg-[#008C3D]/40'> 
+                                        <div className='bg-sky-900 mt-1 mb-3 rounded overflow-hidden shadow-lg hover:bg-sky-700'> 
                                             <div className="flex flex-row items-start justify-between px-2 ">
                                                 <div className="flex flex-col items-start px-2 py-2">
-                                                    <span className='text-[12px] font-bold'>Evento</span>
-                                                    <div className="text-[12px] mb-0">{item.eveDesc}</div>
+                                                    <div className="text-sky-300 text-xs font-bold mb-0">{item.eveDesc}</div>
                                                     <div className="flex flex-row w-full items-start justify-between mt-1 ">
-                                                        <div className="w-auto text-xs font-semibold mb-0">
-                                                            Data: {item.movData}
+                                                        <div className="w-auto text-sky-300 text-xs font-semibold mb-0">
+                                                            Data: {moment(item.movData).utc().locale('pt-br').format('L')}
                                                         </div>
-                                                        <div className="w-auto text-xs font-semibold mb-0 ml-10">
+                                                        <div className="w-auto text-sky-300 text-xs font-semibold mb-0 ml-10">
                                                             Horas: {item.movHora}
                                                         </div>
                                                     </div>
                                                 </div>                
                                             </div>
                                             <div className="flex flex-row items-start justify-between px-2 py-0 mt-1 ">
-                                                <div className="flex flex-row items-start px-2 py-1">
-                                                    <div className="text-base font-bold mb-0 mr-10">{item.timeA_desc}</div>
-                                                    <div className="text-base font-bold mb-0">{item.movResult01}</div>
-                                                </div>  
-                                                <div className="flex flex-col items-start px-2 py-1">
-                                                    <span className="text-base font-bold mb-0">X</span>
-                                                </div>  
-                                                <div className="flex flex-row items-start px-2 py-1">
-                                                    <div className="text-base font-bold mb-0 ">{item.movResult03}</div>
-                                                    <div className="text-base font-bold mb-0 ml-10">{item.timeC_desc}</div>
-                                                </div>                                  
+                                                <div className="flex flex-row items-start px-2 py-0">
+                                                    <div className="text-white text-sm font-bold mb-0 mr-2">{item.timeA_desc}</div>
+                                                </div>                                                 
+                                                <div className="flex flex-col items-start px-1 py-0">
+                                                    <span className="text-white text-sm font-bold mb-0">X</span>
+                                                </div>                                                
+                                                <div className="flex flex-row items-start px-2 py-0">
+                                                    <div className="text-white text-sm font-bold mb-0">{item.timeC_desc}</div>
+                                                </div>
                                             </div>
+                                            <div className="flex flex-row items-start justify-between px-2 py-0 mt-1 ">
+                                                <div className="flex flex-row items-start px-10 py-0">
+                                                    <div className="text-white text-sm font-bold mb-0">{item.movResult01}</div>
+                                                </div>
+                                                <div className="flex flex-row items-start px-10 py-0">
+                                                    <div className="text-white text-sm font-bold mb-0">{item.movResult03}</div>
+                                                </div>
+                                            </div>    
                                             <div className="flex flex-row items-start justify-between px-2 py-0 ">
                                                 <div className="flex flex-col items-start px-2 py-1">
-                                                    <div className="w-20 text-base bg-slate-300 rounded-md font-bold mb-0">
+                                                    <div className="w-16 text-xs bg-slate-300 rounded-md font-bold mb-0">
                                                         {parseFloat(item.movPayout01).toFixed(2)}
                                                     </div>
                                                 </div>  
                                                 <div className="flex flex-col items-start px-2 py-1">
-                                                    <div className="w-20 text-base bg-slate-300 rounded-md font-bold mb-0">
+                                                    <div className="w-16 text-xs bg-slate-300 rounded-md font-bold mb-0">
                                                     {parseFloat(item.movPayout02).toFixed(2)}                                                      
                                                     </div>
                                                 </div>  
                                                 <div className="flex flex-col items-start px-2 py-1">
-                                                    <div className="w-20 text-base bg-slate-300 rounded-md font-bold mb-0">
+                                                    <div className="w-16 text-xs bg-slate-300 rounded-md font-bold mb-0">
                                                     {parseFloat(item.movPayout03).toFixed(2)}
                                                    </div>
                                                 </div>    
