@@ -497,19 +497,15 @@ export default function Dashboard() {
                                     {movimentos?.map((item:any, idx) => {
                                     return <button key={idx} onClick={() => handleSubmit(item)}>                                                                               
                                         <div className='bg-sky-900 mt-1 mb-3 rounded overflow-hidden shadow-lg hover:bg-sky-700'> 
-                                            <div className="flex flex-row items-start justify-between px-2 ">
-                                                <div className="flex flex-col items-start px-2 py-2">
-                                                    <div className="text-sky-300 text-xs font-bold mb-0">{item.eveDesc}</div>
-                                                    <div className="flex flex-row w-full items-start justify-between mt-1 ">
-                                                        <div className="w-auto text-sky-300 text-xs font-semibold mb-0">
-                                                            Data: {moment(item.movData).utc().locale('pt-br').format('L')}
-                                                        </div>
-                                                        <div className="w-auto text-sky-300 text-xs font-semibold mb-0 ml-10">
-                                                            Horas: {item.movHora}
-                                                        </div>
-                                                    </div>
-                                                </div>                
-                                            </div>
+                                            <div className="text-sky-300 text-xs font-bold ml-2 mb-0">{item.eveDesc}</div>
+                                            <div className="flex-row w-full justify-between mt-1 ">
+                                                <span className="w-auto text-sky-300 text-xs font-semibold ml-2">
+                                                    {moment(item.movData).utc().locale('pt-BR').format('ll')}
+                                                </span>
+                                                <span className="w-auto text-sky-300 text-xs font-semibold mb-0 ml-12">
+                                                    {item.movHora}
+                                                </span>
+                                            </div>                                                                                                    
                                             <div className="flex flex-row items-start justify-between px-2 py-0 mt-1 ">
                                                 <div className="flex flex-row items-start px-2 py-0">
                                                     <div className="text-white text-sm font-bold mb-0 mr-2">{item.timeA_desc}</div>
